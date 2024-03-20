@@ -22,8 +22,18 @@ int cible(const Grille &g){
   }
 
 int dimension(const Grille &g){
-  int res = -1;
-  return res;
+  
+  //Verifie que la grille est bien carree
+  size_t dim = g.table.size();
+  for (size_t i = 0; i < dim; i += 1){
+    if (g.table.at(i).size() != dim){
+      cerr << "Pas un carre" << endl;
+      return -1;
+    }
+  }
+
+  // Renvoie la dimension
+  return dim;
   }
 
 int score(const Grille &g){
