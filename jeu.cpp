@@ -6,15 +6,30 @@
  * compilateur ne râle pas. Il faut bien sur écrire le code de ces fonctions
  */
 
-int vides(const Grille &g) { int res = -1; return res; }
+int vides(const Grille &g){
+  int res = -1;
+  return res;
+  }
 
-int proportion(const Grille &g) { int res = -1; return res; }
+int proportion(const Grille &g){
+  int res = -1;
+  return res;
+  }
 
-int cible(const Grille &g)  { int res = -1; return res; }
+int cible(const Grille &g){
+  int res = -1;
+  return res; 
+  }
 
-int dimension(const Grille &g)  { int res = -1; return res; }
+int dimension(const Grille &g){
+  int res = -1;
+  return res;
+  }
 
-int score(const Grille &g)  { int res = -1; return res; }
+int score(const Grille &g){
+  int res = -1;
+  return res;
+  }
 
 bool succes(const Grille &g) { return false; }
 
@@ -36,13 +51,25 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
 }
 
 
-int droite(Grille &g)  { int res = -1; return res; }
+int droite(Grille &g){
+  int res = -1;
+  return res;
+  }
 
-int gauche(Grille &g)  { int res = -1; return res; }
+int gauche(Grille &g)
+{ int res = -1;
+return res;
+}
 
-int haut(Grille &g)    { int res = -1; return res; }
+int haut(Grille &g){
+  int res = -1;
+  return res;
+  }
 
-int bas(Grille &g)     { int res = -1; return res; }
+int bas(Grille &g){
+  int res = -1;
+  return res;
+  }
 
 
 /*		 Pour les extensions éventuelles */
