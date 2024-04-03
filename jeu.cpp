@@ -1,6 +1,6 @@
 #include "jeu.h"
 #include <iomanip> // pour setw dans affichage.
-
+#include "dispo.cpp"
 
 /* Les definitions actuelles des fonctions servent uniquement à ce que le
  * compilateur ne râle pas. Il faut bien sur écrire le code de ces fonctions
@@ -34,8 +34,22 @@ int score(const Grille &g){
 bool succes(const Grille &g) { return false; }
 
 bool init(Grille &g, int dimension, int cible, int proportion) {
+  /*initialise g avec les parametres indiques ; 
+  En sortie, g doit comporter deux tuiles dont les
+  valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
+  la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
-  // a faire
+  //parcours de la grille pour trouver le truc donné par place()
+  int pla = place(g);
+  int id = 0;
+  for(size_t i = 0; i<dimension; i+=1){
+    for(size_t j = 0; j<dimension; j+=1){
+      g.table.at(i).at(j) = 0; //initialisation à 0
+      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //nouvelle donne la valeur de la tuile
+      id += 1;
+    }
+  }
+
   return res;
 }
 
