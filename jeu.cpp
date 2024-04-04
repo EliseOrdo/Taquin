@@ -68,6 +68,8 @@ int droite(Grille &g){
         g.table.at(i).at(id1) = val2;
         g.table.at(i).at(id2) = 0;
         id2 -= 1;
+        //si on déplace un truc, on a pu faire le mouvement, on refresh res
+        res = 1;
       }
       else if(val1 == val2){
         g.table.at(i).at(id1) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
@@ -76,6 +78,8 @@ int droite(Grille &g){
         id1 -= 1;
         val1 = g.table.at(i).at(id1);
         id2 -= 1;
+        //on a pu faire le mouvement, on refresh res
+        res = 1;
       }
       else{
         id1 -= 1;
@@ -85,22 +89,27 @@ int droite(Grille &g){
       
     } 
   }//rajouter une tuile de 2 ou 4 si l'action a été possible
+  if(res!=-1){
+
+    res = vides(g);
+  }
   return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
   }
 
 int gauche(Grille &g)
 { int res = -1;
-return vides(g);
+
+return res;
 }
 
 int haut(Grille &g){
   int res = -1;
-  return vides(g);
+  return res;
   }
 
 int bas(Grille &g){
   int res = -1;
-  return vides(g);
+  return res;
   }
 
 
