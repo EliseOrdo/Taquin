@@ -48,7 +48,7 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
       if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
       id += 1; 
     }
-  }
+  }res = true; 
 
   return res;
 }
