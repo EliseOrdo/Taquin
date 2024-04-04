@@ -52,21 +52,40 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
 
 
 int droite(Grille &g){
+  int res = -1; //si aucun changement possible
   for(size_t i=0; i<g.table.size(); i+=1){
-    for(size_t j=g.table.size()-1; j>0; j-=1){ //voir consigne, on parcours dans l'autre sens pour fusionner à partir de la droite
-      if(g.table.at(i).at(j) == g.table.at(i).at(j-1)){
-        // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
-        g.table.at(i).at(j) += g.table.at(i).at(j) ; 
-        g.table.at(i).at(j-1) += 0; //on vide le case de gauche
+    size_t id1 = g.table.size()-1; //comme c'est carré l'indice de fin est le même pour lignes et colonnes
+    //voir consigne, on parcours dans l'autre sens pour fusionner à partir de la droite
+    int val1 = g.table.at(i).at(id1); //on garde le chiffre en mémoire pour l'ajouter
+    int val2 = 0; 
+    size_t id2 = id1 -1 ;
+    while(id2 >= 0){ //tant qu'on est pas au début de la ligne
+      val2 = g.table.at(i).at(id2);
+      if(val2 == 0){
+        id2 -= 1;
       }
-      else if (g.table.at(i).at(j-1) != 0 and g.table.at(i).at(j)==0 ){
-        //si la case de droite est libre et que celle de gauche est pleine, on décale celle de gauche à droite
-        g.table.at(i).at(j) = g.table.at(i).at(j-1);
-        g.table.at(i).at(j-1) = 0;
+      else if(val1 == 0 and val2 != 0){
+        g.table.at(i).at(id1) = val2;
+        g.table.at(i).at(id2) = 0;
+        id2 -= 1;
       }
+      else if(val1 == val2){
+        g.table.at(i).at(id1) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.table.at(i).at(id2) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
+        //une case fusionnée ne peut se refusionner dans le même mouvement
+        id1 -= 1;
+        val1 = g.table.at(i).at(id1);
+        id2 -= 1;
+      }
+      else{
+        id1 -= 1;
+        val1 = g.table.at(i).at(id1);
+        if(id1 == id2){id2-=1;} //on évite que les indices se chevauchent
+      }
+      
     } 
-  }//rajouter 2 cases de 2 si l'action a été possible
-  return vides(g); // ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
+  }//rajouter une tuile de 2 ou 4 si l'action a été possible
+  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
   }
 
 int gauche(Grille &g)
