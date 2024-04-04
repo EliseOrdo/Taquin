@@ -52,23 +52,36 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
 
 
 int droite(Grille &g){
-  int res = -1;
-  return res;
+  for(size_t i=0; i<g.table.size(); i+=1){
+    for(size_t j=g.table.size()-1; j>0; j-=1){ //voir consigne, on parcours dans l'autre sens pour fusionner à partir de la droite
+      if(g.table.at(i).at(j) == g.table.at(i).at(j-1)){
+        // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.table.at(i).at(j) += g.table.at(i).at(j) ; 
+        g.table.at(i).at(j-1) += 0; //on vide le case de gauche
+      }
+      else if (g.table.at(i).at(j-1) != 0 and g.table.at(i).at(j)==0 ){
+        //si la case de droite est libre et que celle de gauche est pleine, on décale celle de gauche à droite
+        g.table.at(i).at(j) = g.table.at(i).at(j-1);
+        g.table.at(i).at(j-1) = 0;
+      }
+    } 
+  }//rajouter 2 cases de 2 si l'action a été possible
+  return vides(g); // ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
   }
 
 int gauche(Grille &g)
 { int res = -1;
-return res;
+return vides(g);
 }
 
 int haut(Grille &g){
   int res = -1;
-  return res;
+  return vides(g);
   }
 
 int bas(Grille &g){
   int res = -1;
-  return res;
+  return vides(g);
   }
 
 
