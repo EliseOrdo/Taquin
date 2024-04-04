@@ -41,12 +41,12 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   bool res = false;
   //parcours de la grille pour trouver le truc donné par place()
   int pla = place(g);
-  int id = 0;
+  int id = 0; // numéro de case vide où on est
   for(size_t i = 0; i<dimension; i+=1){
     for(size_t j = 0; j<dimension; j+=1){
-      g.table.at(i).at(j) = 0; //initialisation à 0
-      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //nouvelle donne la valeur de la tuile
-      id += 1;
+      g.table.at(i).at(j) = 0; //initialisation de la case à 0
+      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
     }
   }
 
