@@ -12,18 +12,15 @@ int vides(const Grille &g){
   }
 
 int proportion(const Grille &g){
-  int res = -1;
-  return res;
+  return g.proportion;
   }
 
 int cible(const Grille &g){
-  int res = -1;
-  return res; 
+  return g.cible;
   }
 
 int dimension(const Grille &g){
-  int res = -1;
-  return res;
+  return g.dimension;
   }
 
 int score(const Grille &g){
@@ -39,6 +36,9 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
+  g.dimension = dimension;
+  g.cible = cible;
+  g.proportion = proportion;
   //parcours de la grille pour trouver le truc donné par place()
   int pla = place(g);
   int id = 0; // numéro de case vide où on est
