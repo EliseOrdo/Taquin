@@ -7,9 +7,23 @@
  */
 
 int vides(const Grille &g){
-  int res = -1;
-  return res;
+  int res = 0;
+  /*Regarde si c'est pas une grille vide*/
+  if (g.table.size() == 0){
+    return -1;
   }
+  for (size_t i=0; i < g.table.size(); i+=1){
+    if (g.table.size() != g.table.at(i).size()){
+        return -1;
+      }
+    for (size_t j=0; j < g.table.at(i).size(); j+=1){
+      if (g.table.at(i).at(j) == 0){
+        res += 1;
+      }
+    }
+  }
+  return res;
+}
 
 int proportion(const Grille &g){
   int res = -1;
