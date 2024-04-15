@@ -1,3 +1,4 @@
+#include "jeu.h"
 #include "jeu.cpp"
 #include <cassert>
 
@@ -16,5 +17,8 @@ void test_vides(){
 
 int main(){
     test_vides();
+    Grille g;
+    init(g, 4, 2048, 5);
+    affiche(g);
     return 0;
 }

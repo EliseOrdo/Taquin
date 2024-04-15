@@ -1,6 +1,6 @@
 #include "jeu.h"
 #include <iomanip> // pour setw dans affichage.
-
+#include "dispo.cpp"
 
 /* Les definitions actuelles des fonctions servent uniquement à ce que le
  * compilateur ne râle pas. Il faut bien sur écrire le code de ces fonctions
@@ -26,18 +26,15 @@ int vides(const Grille &g){
 }
 
 int proportion(const Grille &g){
-  int res = -1;
-  return res;
+  return g.proportion;
   }
 
 int cible(const Grille &g){
-  int res = -1;
-  return res; 
+  return g.cible;
   }
 
 int dimension(const Grille &g){
-  int res = -1;
-  return res;
+  return g.dimension;
   }
 
 int score(const Grille &g){
@@ -48,8 +45,25 @@ int score(const Grille &g){
 bool succes(const Grille &g) { return false; }
 
 bool init(Grille &g, int dimension, int cible, int proportion) {
+  /*initialise g avec les parametres indiques ; 
+  En sortie, g doit comporter deux tuiles dont les
+  valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
+  la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
-  // a faire
+  g.dimension = dimension;
+  g.cible = cible;
+  g.proportion = proportion;
+  //parcours de la grille pour trouver le truc donné par place()
+  int pla = place(g);
+  int id = 0; // numéro de case vide où on est
+  for(size_t i = 0; i<dimension; i+=1){
+    for(size_t j = 0; j<dimension; j+=1){
+      g.table.at(i).at(j) = 0; //initialisation de la case à 0
+      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
+    }
+  }res = true; 
+
   return res;
 }
 
