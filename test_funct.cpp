@@ -15,11 +15,29 @@ void test_vides(){
 
 }
 
+void vect(Grille g){
+    for(size_t i = 0; i<g.dimension ; i++){
+        for(size_t j = 0; j<g.dimension; j++){
+            cout<<"  "<<g.table.at(i).at(j);
+        }cout<<endl;
+    }
+}
+
 int main(){
     resetRand(true);
     test_vides();
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
+    vect(g);
+    droite(g);
+    vect(g);
+    affiche(g);
+    /*gauche(g);
+    affiche(g);
+    haut(g);
+    affiche(g);
+    bas(g);
+    affiche(g);*/
     return 0;
 }
