@@ -16,6 +16,7 @@ void test_vides(){
 }
 
 int main(){
+    resetRand(true);
     test_vides();
     Grille g;
     init(g, 4, 2048, 5);

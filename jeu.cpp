@@ -50,19 +50,23 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
+  assert(dimension > 0);
   g.dimension = dimension;
   g.cible = cible;
   g.proportion = proportion;
   //parcours de la grille pour trouver le truc donné par place()
-  int pla = place(g);
   int id = 0; // numéro de case vide où on est
+  vector<int> t = vector<int> (dimension,0);
+  g.table = vector<vector<int>> (dimension, t);
+  int pla = place(g);
   for(size_t i = 0; i<dimension; i+=1){
     for(size_t j = 0; j<dimension; j+=1){
-      g.table.at(i).at(j) = 0; //initialisation de la case à 0
-      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      t.at(j) = 0; //initialisation de la case à 0
+      if(id == pla){t.at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
       id += 1; 
-    }
-  }res = true; 
+    }g.table.at(i) = t;
+  }
+  res = true; 
 
   return res;
 }
