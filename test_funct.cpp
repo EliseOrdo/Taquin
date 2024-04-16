@@ -55,7 +55,7 @@ void test_mouvements(){
     affiche(g);
 }
 
-void vect(Grille g){
+void affiche_vect(Grille g){
     int dim = dimension(g);
     for(size_t i = 0; i<dim; i++){
         for(size_t j = 0; j<dim; j++){
