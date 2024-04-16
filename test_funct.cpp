@@ -43,8 +43,9 @@ void test_vides(){
 
 
 void vect(Grille g){
-    for(size_t i = 0; i<g.dimension ; i++){
-        for(size_t j = 0; j<g.dimension; j++){
+    int dim = dimension(g);
+    for(size_t i = 0; i<dim ; i++){
+        for(size_t j = 0; j<dim; j++){
             cout<<"  "<<g.table.at(i).at(j);
         }cout<<endl;
     }
