@@ -22,16 +22,18 @@ int cible(const Grille &g){
   }
 
 int dimension(const Grille &g){
-  
   //Verifie que la grille est bien carree
   size_t dim = g.table.size();
+  if (dim == 0){
+    cerr << "La grille est vide" << endl;
+    return -1;
+  }
   for (size_t i = 0; i < dim; i += 1){
     if (g.table.at(i).size() != dim){
-      cerr << "Pas un carre" << endl;
+      cerr << "La grille n'est pas un carre" << endl;
       return -1;
     }
   }
-
   // Renvoie la dimension
   return dim;
   }
@@ -53,25 +55,12 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
 
 // Ne pas oublier de vérifier la validité des paramètres !
 bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
-  size_t dim = v.size();
-
+  size_t dim = dimension(g);
   // Verification de la validite des parametres
-  if (dim < 4) {
-    cerr << "Nombre de lignes insuffisant: " << v.size() << endl;
-    return false;
+  if(dim <= 0){
+    return -1;
   }
-  for (size_t i = 0; i < dim; i += 1){
-    if (v.at(i).size() < 4){
-      cerr << "Nombre de colonnes insuffisant: " << v.at(i).size() << endl;
-      return false;
-    }else if(v.at(i).size() != dim){
-      cerr << "Pas un carre" << endl;
-      return false;
-    }
-  }
-
   //Initialisation de la grille
-
   g.table = v;
   return true;
 }
