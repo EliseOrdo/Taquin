@@ -22,9 +22,6 @@ using namespace std;
 
 typedef struct {
   // structure a completer selon vos besoins.
-  int proportion;
-  int cible;
-  int dimension;
   vector<vector<int>> table;	// carre de la bonne dimension
 } Grille;
 
