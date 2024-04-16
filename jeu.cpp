@@ -57,17 +57,31 @@ int score(const Grille &g){
 
 bool succes(const Grille &g) { return false; }
 
+void ajoute(Grille &g){
+  /*ajoute une nouvelle case (hasard) dans la grille g*/
+  //parcours de la grille pour trouver le truc donné par place()
+  int id = 0; // numéro de case vide où on est
+  int pla = place(g);
+  int dim = dimension(g);
+  for(size_t i = 0; i<dim; i+=1){
+    for(size_t j = 0; j<dim; j+=1){
+      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
+    }
+  }
+}
+
 bool init(Grille &g, int dimension, int cible, int proportion) {
   /*initialise g avec les parametres indiques ; 
   En sortie, g doit comporter deux tuiles dont les
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
-  assert(dimension > 0);
+  if(dimension <= 0){return false;}
   //parcours de la grille pour trouver le truc donné par place()
-  int id = 0; // numéro de case vide où on est
   vector<int> t = vector<int> (dimension,0);
   g.table = vector<vector<int>> (dimension, t);
+  int id = 0; // numéro de case vide où on est
   int pla = place(g);
   for(size_t i = 0; i<dimension; i+=1){
     for(size_t j = 0; j<dimension; j+=1){
@@ -75,7 +89,7 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
       if(id == pla){t.at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
       id += 1; 
     }g.table.at(i) = t;
-  }
+  }ajoute(g); //on ajoute la 2e tuile de départ
   res = true; 
 
   return res;
@@ -92,19 +106,7 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
   return res;
 }
 
-void ajoute(Grille &g){
-  /*ajoute une nouvelle case (hasard) dans la grille g*/
-  //parcours de la grille pour trouver le truc donné par place()
-      int id = 0; // numéro de case vide où on est
-      int pla = place(g);
-      int dim = dimension(g);
-      for(size_t i = 0; i<dim; i+=1){
-        for(size_t j = 0; j<dim; j+=1){
-          if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
-          id += 1; 
-        }
-      }
-    }
+
 
 int droite(Grille &g){
   int res = -1; //si aucun changement possible

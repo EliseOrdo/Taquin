@@ -42,17 +42,24 @@ void test_vides(){
 }
 
 void test_mouvements(){
+    cout<<"Debut du test des mouvements"<<endl;
     Grille g;
     init(g, 4, 2048, 5);
+    cout<<"nouvelle grille :"<<endl;
     affiche(g);
+    cout<<"droite :"<<endl;
     droite(g);
     affiche(g);
+    cout<<"gauche :"<<endl;
     gauche(g);
     affiche(g);
+    cout<<"haut :"<<endl;
     haut(g);
     affiche(g);
+    cout<<"bas :"<<endl;
     bas(g);
     affiche(g);
+    cout<<"Fin du test des mouvements"<<endl;
 }
 
 void affiche_vect(Grille g){
