@@ -44,7 +44,7 @@ void test_vides(){
 
 void vect(Grille g){
     int dim = dimension(g);
-    for(size_t i = 0; i<dim ; i++){
+    for(size_t i = 0; i<dim; i++){
         for(size_t j = 0; j<dim; j++){
             cout<<"  "<<g.table.at(i).at(j);
         }cout<<endl;
@@ -60,16 +60,13 @@ int main(){
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
-    vect(g);
     droite(g);
-    vect(g);
     affiche(g);
-    /*gauche(g);
+    gauche(g);
     affiche(g);
     haut(g);
     affiche(g);
     bas(g);
-    affiche(g);*/
-
+    affiche(g);
     return 0;
 }
