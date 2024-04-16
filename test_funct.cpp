@@ -29,15 +29,13 @@ int main(){
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
-    vect(g);
     droite(g);
-    vect(g);
     affiche(g);
-    /*gauche(g);
+    gauche(g);
     affiche(g);
     haut(g);
     affiche(g);
     bas(g);
-    affiche(g);*/
+    affiche(g);
     return 0;
 }
