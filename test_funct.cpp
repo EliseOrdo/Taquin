@@ -62,15 +62,6 @@ void test_mouvements(){
     cout<<"Fin du test des mouvements"<<endl;
 }
 
-void affiche_vect(Grille g){
-    int dim = dimension(g);
-    for(size_t i = 0; i<dim; i++){
-        for(size_t j = 0; j<dim; j++){
-            cout<<"  "<<g.table.at(i).at(j);
-        }cout<<endl;
-    }
-}
-
 
 int main(){
     test_dimension();
