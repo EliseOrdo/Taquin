@@ -26,11 +26,11 @@ int vides(const Grille &g){
 }
 
 int proportion(const Grille &g){
-  return g.proportion;
+  return -1;
   }
 
 int cible(const Grille &g){
-  return g.cible;
+  return -1;
   }
 
 int dimension(const Grille &g){
@@ -66,9 +66,6 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
   assert(dimension > 0);
-  g.dimension = dimension;
-  g.cible = cible;
-  g.proportion = proportion;
   //parcours de la grille pour trouver le truc donné par place()
   int id = 0; // numéro de case vide où on est
   vector<int> t = vector<int> (dimension,0);
@@ -101,6 +98,8 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
 
 int droite(Grille &g){
   int res = -1; //si aucun changement possible
+  int dim = dimension(g);
+  if (dim <= 0){return -1;}
   for(size_t i=0; i<g.table.size(); i+=1){
     int id1 = g.table.size()-1; //comme c'est carré l'indice de fin est le même pour lignes et colonnes
     //voir consigne, on parcours dans l'autre sens pour fusionner à partir de la droite
@@ -150,8 +149,8 @@ int droite(Grille &g){
     //parcours de la grille pour trouver le truc donné par place()
     int id = 0; // numéro de case vide où on est
     int pla = place(g);
-    for(size_t i = 0; i<g.dimension; i+=1){
-      for(size_t j = 0; j<g.dimension; j+=1){
+    for(size_t i = 0; i<dim; i+=1){
+      for(size_t j = 0; j<dim; j+=1){
         g.table.at(i).at(j) = 0; //initialisation de la case à 0
         if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
         id += 1; 
