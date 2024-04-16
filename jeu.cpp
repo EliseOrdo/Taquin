@@ -26,11 +26,11 @@ int vides(const Grille &g){
 }
 
 int proportion(const Grille &g){
-  return g.proportion;
+  return -1;
   }
 
 int cible(const Grille &g){
-  return g.cible;
+  return -1;
   }
 
 int dimension(const Grille &g){
@@ -66,9 +66,6 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   la fonction renvoie true en cas de succes et false sinon */
   bool res = false;
   assert(dimension > 0);
-  g.dimension = dimension;
-  g.cible = cible;
-  g.proportion = proportion;
   //parcours de la grille pour trouver le truc donné par place()
   int id = 0; // numéro de case vide où on est
   vector<int> t = vector<int> (dimension,0);
