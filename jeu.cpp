@@ -34,7 +34,20 @@ int cible(const Grille &g){
   }
 
 int dimension(const Grille &g){
-  return g.dimension;
+  //Verifie que la grille est bien carree
+  size_t dim = g.table.size();
+  if (dim == 0){
+    cerr << "La grille est vide" << endl;
+    return -1;
+  }
+  for (size_t i = 0; i < dim; i += 1){
+    if (g.table.at(i).size() != dim){
+      cerr << "La grille n'est pas un carre" << endl;
+      return -1;
+    }
+  }
+  // Renvoie la dimension
+  return dim;
   }
 
 int score(const Grille &g){
@@ -84,8 +97,9 @@ void ajoute(Grille &g){
   //parcours de la grille pour trouver le truc donné par place()
       int id = 0; // numéro de case vide où on est
       int pla = place(g);
-      for(size_t i = 0; i<g.dimension; i+=1){
-        for(size_t j = 0; j<g.dimension; j+=1){
+      int dim = dimension(g);
+      for(size_t i = 0; i<dim; i+=1){
+        for(size_t j = 0; j<dim; j+=1){
           if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
           id += 1; 
         }

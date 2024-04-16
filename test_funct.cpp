@@ -41,6 +41,19 @@ void test_vides(){
     cout << "Fin du test de vides()" << endl << endl << endl;
 }
 
+void test_mouvements(){
+    Grille g;
+    init(g, 4, 2048, 5);
+    affiche(g);
+    droite(g);
+    affiche(g);
+    gauche(g);
+    affiche(g);
+    haut(g);
+    affiche(g);
+    bas(g);
+    affiche(g);
+}
 
 void vect(Grille g){
     int dim = dimension(g);
@@ -56,17 +69,6 @@ int main(){
     test_dimension();
     test_init();
     test_vides();
-
-    Grille g;
-    init(g, 4, 2048, 5);
-    affiche(g);
-    droite(g);
-    affiche(g);
-    gauche(g);
-    affiche(g);
-    haut(g);
-    affiche(g);
-    bas(g);
-    affiche(g);
+    test_mouvements();
     return 0;
 }
