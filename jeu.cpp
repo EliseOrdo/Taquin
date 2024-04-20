@@ -30,7 +30,7 @@ int proportion(const Grille &g){
   }
 
 int cible(const Grille &g){
-  return -1;
+  return g.cible;
   }
 
 int dimension(const Grille &g){
@@ -55,7 +55,14 @@ int score(const Grille &g){
   return res;
   }
 
-bool succes(const Grille &g) { return false; }
+bool succes(const Grille &g) { 
+  for(size_t i=0; i<dimension(g); i+=1 ){
+    for(size_t j=0; j<dimension(g); j+=1){
+      if(g.table.at(i).at(j) == cible(g)){return true;}
+    }
+  }
+  return false; 
+  }
 
 void ajoute(Grille &g){
   /*ajoute une nouvelle case (hasard) dans la grille g*/
@@ -76,6 +83,7 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   En sortie, g doit comporter deux tuiles dont les
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
+  g.cible = cible;
   bool res = false;
   if(dimension <= 0){return false;}
   //parcours de la grille pour trouver le truc donné par place()
