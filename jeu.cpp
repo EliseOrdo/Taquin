@@ -30,7 +30,7 @@ int proportion(const Grille &g){
   }
 
 int cible(const Grille &g){
-  return -1;
+  return g.cible;
   }
 
 int dimension(const Grille &g){
