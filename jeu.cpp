@@ -76,6 +76,7 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   En sortie, g doit comporter deux tuiles dont les
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
+  g.cible = cible;
   bool res = false;
   if(dimension <= 0){return false;}
   //parcours de la grille pour trouver le truc donné par place()
