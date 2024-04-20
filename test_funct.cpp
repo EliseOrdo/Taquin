@@ -15,7 +15,7 @@ void test_dimension(){
     assert(dimension(g3) == 1);
     assert(dimension(g4) == -1);
     assert(dimension(g5) == 5);
-    cout << "Fin du test de dimension()" << endl << endl << endl;
+    cout << "Fin du test de dimension()" << endl << endl;
 }
 
 void test_init(){
@@ -24,7 +24,7 @@ void test_init(){
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
-    cout << "Fin du test de init()" << endl << endl << endl;
+    cout << "Fin du test de init()" << endl << endl;
 }
 
 void test_vides(){
@@ -38,10 +38,11 @@ void test_vides(){
     assert(vides(g2) == -1);
     assert(vides(g3) == 10);
     assert(vides(g4) == 0);
-    cout << "Fin du test de vides()" << endl << endl << endl;
+    cout << "Fin du test de vides()" << endl << endl;
 }
 
 void test_mouvements(){
+    cout << "Debut du test des mouvements" << endl;
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
@@ -53,8 +54,18 @@ void test_mouvements(){
     affiche(g);
     bas(g);
     affiche(g);
+    cout << "Fin du test des mouvements" << endl << endl;
 }
 
+void test_proportion(){
+    cout << "Debut du test de proportion()" << endl;
+    Grille g1, g2, g3, g4, g5;
+    g1.table = {{0, 2, 0, 2}, {0, 2, 0, 2}, {0, 2, 0, 2}, {0, 2, 0, 2}};
+    g2.table = {};
+    g3.table = {{}};
+    g4.table = {{1}, {}};
+    g5.table = {{2, 0, 4, 8}, {8, 16, 2, 0}, {64, 32, 2, 0}, {128, 2, 0, 0}};
+}
 
 int main(){
     test_dimension();
