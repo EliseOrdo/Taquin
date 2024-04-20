@@ -55,7 +55,14 @@ int score(const Grille &g){
   return res;
   }
 
-bool succes(const Grille &g) { return false; }
+bool succes(const Grille &g) { 
+  for(size_t i=0; i<dimension(g); i+=1 ){
+    for(size_t j=0; j<dimension(g); j+=1){
+      if(g.table.at(i).at(j) == cible(g)){return true;}
+    }
+  }
+  return false; 
+  }
 
 void ajoute(Grille &g){
   /*ajoute une nouvelle case (hasard) dans la grille g*/

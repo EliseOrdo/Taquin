@@ -62,11 +62,22 @@ void test_mouvements(){
     cout<<"Fin du test des mouvements"<<endl;
 }
 
+void test_succes(){
+    cout<<"debut du test de succes"<<endl;
+    Grille g;
+    init(g,4,4,5);
+    assert(succes(g) == true);
+    Grille d;
+    init(d,4,5,3);
+    assert(succes(d) == false);
+    cout<<"fin du test de succes"<<endl;
+}
 
 int main(){
     test_dimension();
     test_init();
     test_vides();
     test_mouvements();
+    test_succes();
     return 0;
 }
