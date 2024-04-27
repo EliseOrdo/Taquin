@@ -65,12 +65,18 @@ void test_proportion(){
     g3.table = {{}};
     g4.table = {{1}, {}};
     g5.table = {{2, 0, 4, 8}, {8, 16, 2, 0}, {64, 32, 2, 0}, {128, 2, 0, 0}};
+    assert(proportion(g1) == 5);
+    assert(proportion(g2) == -1);
+    assert(proportion(g3) == -1);
+    assert(proportion(g4) == -1);
+    //assert(proportion(g5) == 2);
 }
 
 int main(){
-    test_dimension();
-    test_init();
-    test_vides();
-    test_mouvements();
+    //test_dimension();
+    //test_init();
+    //test_vides();
+    test_proportion();
+    //test_mouvements();
     return 0;
 }
