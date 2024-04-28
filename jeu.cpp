@@ -96,15 +96,15 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   return res;
 }
 
-// Ne pas oublier de vérifier la validité des paramètres !
-bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
-  size_t dim = v.size(); bool res = false;
-  if (dim < 4) {
-    cerr << "Nombre de lignes insuffisant: " << v.size() << endl;
-    return res;
+bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
+  size_t dim = dimension(g);
+  // Verification de la validite des parametres
+  if(dim <= 0){
+    return -1;
   }
-  // a faire
-  return res;
+  //Initialisation de la grille
+  g.table = v;
+  return true;
 }
 
 void ajoute(Grille &g){
