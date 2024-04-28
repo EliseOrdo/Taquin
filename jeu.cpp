@@ -22,53 +22,263 @@ int cible(const Grille &g){
   }
 
 int dimension(const Grille &g){
-  int res = -1;
-  return res;
+  //Verifie que la grille est bien carree
+  size_t dim = g.table.size();
+  if (dim == 0){
+    cerr << "La grille est vide" << endl;
+    return -1;
   }
+  for (size_t i = 0; i < dim; i += 1){
+    if (g.table.at(i).size() != dim){
+      cerr << "La grille n'est pas un carre" << endl;
+      return -1;
+    }
+  }
+  // Renvoie la dimension
+  return dim;
+}
 
 int score(const Grille &g){
-  int res = -1;
-  return res;
+  return g.score;
+}
+
+bool succes(const Grille &g) { 
+  for(size_t i=0; i<dimension(g); i+=1 ){
+    for(size_t j=0; j<dimension(g); j+=1){
+      if(g.table.at(i).at(j) == cible(g)){return true;}
+    }
+  }
+  return false; 
   }
 
-bool succes(const Grille &g) { return false; }
+void ajoute(Grille &g){
+  /*ajoute une nouvelle case (hasard) dans la grille g*/
+  //parcours de la grille pour trouver le truc donné par place()
+  int id = 0; // numéro de case vide où on est
+  int pla = place(g);
+  int dim = dimension(g);
+  for(size_t i = 0; i<dim; i+=1){
+    for(size_t j = 0; j<dim; j+=1){
+      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
+    }
+  }
+}
 
 bool init(Grille &g, int dimension, int cible, int proportion) {
+  /*initialise g avec les parametres indiques ; 
+  En sortie, g doit comporter deux tuiles dont les
+  valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
+  la fonction renvoie true en cas de succes et false sinon */
+  g.cible = cible;
+  g.score = 0;
   bool res = false;
   // a faire
   return res;
 }
 
-// Ne pas oublier de vérifier la validité des paramètres !
-bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
-  size_t dim = v.size(); bool res = false;
-  if (dim < 4) {
-    cerr << "Nombre de lignes insuffisant: " << v.size() << endl;
-    return res;
+bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
+  size_t dim = dimension(g);
+  // Verification de la validite des parametres
+  if(dim < 4){
+    return -1;
   }
-  // a faire
-  return res;
+  //Initialisation de la grille
+  g.cible = cible;
+  g.score = 0;
+  g.table = v;
+  return true;
 }
 
 
 int droite(Grille &g){
-  int res = -1;
-  return res;
+  int res = -1; //si aucun changement possible
+  int dim = dimension(g);
+  if (dim <= 0){return -1;}
+  for(size_t i=0; i<g.table.size(); i+=1){
+    int id1 = g.table.size()-1; //comme c'est carré l'indice de fin est le même pour lignes et colonnes
+    //voir consigne, on parcours dans l'autre sens pour fusionner à partir de la droite
+    int val1 = g.table.at(i).at(id1); //on garde le chiffre en mémoire pour l'ajouter
+    int val2 = 0; 
+    int id2 = id1 -1 ;
+    while(id2 >= 0){ //tant qu'on est pas au début de la ligne
+      val2 = g.table.at(i).at(id2);
+      if(val2 == 0){
+        id2 -= 1;
+      }
+      else if(val1 == 0 and val2 != 0){
+        g.table.at(i).at(id1) = val2;
+        g.table.at(i).at(id2) = 0;
+        id2 -= 1;
+        val1 = g.table.at(i).at(id1);
+        //si on déplace un truc, on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else if(val1 == val2){
+        g.table.at(i).at(id1) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.table.at(i).at(id2) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
+        g.score += g.table.at(i).at(id1);
+        //une case fusionnée ne peut se refusionner dans le même mouvement
+        id1 -= 1;
+        val1 = g.table.at(i).at(id1);
+        id2 -= 1;
+        //on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else{
+        id1 -= 1;
+        val1 = g.table.at(i).at(id1);
+        if(id1 == id2){id2-=1;} //on évite que les indices se chevauchent
+      }
+    } 
+  }//rajouter une tuile de 2 ou 4 si l'action a été possible
+  if(res!=-1){
+    ajoute(g);
+    res = vides(g);
+  }
+  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
   }
 
 int gauche(Grille &g)
-{ int res = -1;
-return res;
+{ int res = -1; //si aucun changement possible
+  for(size_t i=0; i<g.table.size(); i+=1){
+    int id1 = 0; //comme c'est carré l'indice de fin est le même pour lignes et colonnes
+    //gauche
+    int val1 = g.table.at(i).at(id1); //on garde le chiffre en mémoire pour l'ajouter
+    int val2 = 0; 
+    int id2 = id1 +1 ;
+    while(id2 < g.table.size()){ //tant qu'on est pas à la fin de la ligne
+      val2 = g.table.at(i).at(id2);
+      if(val2 == 0){
+        id2 += 1;
+      }
+      else if(val1 == 0 and val2 != 0){
+        g.table.at(i).at(id1) = val2;
+        g.table.at(i).at(id2) = 0;
+        id2 += 1;
+        val1 = g.table.at(i).at(id1);
+        //si on déplace un truc, on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else if(val1 == val2){
+        g.table.at(i).at(id1) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.score += g.table.at(i).at(id1);
+        g.table.at(i).at(id2) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
+        //une case fusionnée ne peut se refusionner dans le même mouvement
+        id1 += 1;
+        val1 = g.table.at(i).at(id1);
+        id2 += 1;
+        //on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else{
+        id1 += 1;
+        val1 = g.table.at(i).at(id1);
+        if(id1 == id2){id2+=1;} //on évite que les indices se chevauchent
+      }
+      
+    } 
+  }//rajouter une tuile de 2 ou 4 si l'action a été possible
+  if(res!=-1){
+    ajoute(g);
+    res = vides(g);
+  }
+  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
 }
 
 int haut(Grille &g){
-  int res = -1;
-  return res;
+  int res = -1; //si aucun changement possible
+  for(size_t i=0; i<g.table.size(); i+=1){
+    int id1 = 0; //comme c'est carré l'indice de fin est le même pour lignes et colonnes
+    //voir consigne, on parcours dans l'autre sens pour fusionner à partir du haut
+    int val1 = g.table.at(id1).at(i); //on garde le chiffre en mémoire pour l'ajouter
+    int val2 = 0; 
+    int id2 = id1 +1 ;
+    while(id2 < g.table.size()){ //tant qu'on est pas au début de la ligne
+      val2 = g.table.at(id2).at(i);
+      if(val2 == 0){
+        id2 += 1;
+      }
+      else if(val1 == 0 and val2 != 0){
+        g.table.at(id1).at(i) = val2;
+        g.table.at(id2).at(i) = 0;
+        id2 += 1;
+        val1 = g.table.at(id1).at(i);
+        //si on déplace un truc, on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else if(val1 == val2){
+        cout<<"val1==val2 == "<<val1;
+        g.table.at(id1).at(i) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.score += g.table.at(id1).at(i);
+        g.table.at(id2).at(i) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
+        //une case fusionnée ne peut se refusionner dans le même mouvement
+        id1 += 1;
+        val1 = g.table.at(id1).at(i);
+        id2 += 1;
+        //on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else{
+        id1 += 1;
+        val1 = g.table.at(id1).at(i);
+        if(id1 == id2){id2+=1;} //on évite que les indices se chevauchent
+      }
+      
+    } 
+  }//rajouter une tuile de 2 ou 4 si l'action a été possible
+  if(res!=-1){
+    ajoute(g);
+    res = vides(g);
+  }
+  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
   }
 
 int bas(Grille &g){
-  int res = -1;
-  return res;
+  int res = -1; //si aucun changement possible
+  for(size_t i=0; i<g.table.size(); i+=1){
+    int id1 = g.table.size() - 1; //comme c'est carré l'indice de fin est le même pour lignes et colonnes
+    //gauche
+    int val1 = g.table.at(id1).at(i); //on garde le chiffre en mémoire pour l'ajouter
+    int val2 = 0; 
+    int id2 = id1 -1 ;
+    while(id2 >= 0){ //tant qu'on est pas au début de la colonne
+      val2 = g.table.at(id2).at(i);
+      if(val2 == 0){
+        id2 -= 1;
+      }
+      else if(val1 == 0 and val2 != 0){
+        g.table.at(id1).at(i) = val2;
+        g.table.at(id2).at(i) = 0;
+        id2 -= 1;
+        val1 = g.table.at(id1).at(i);
+        //si on déplace un truc, on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else if(val1 == val2){
+        g.table.at(id1).at(i) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.score += g.table.at(id1).at(i);
+        g.table.at(id2).at(i) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
+        //une case fusionnée ne peut se refusionner dans le même mouvement
+        id1 -= 1;
+        val1 = g.table.at(id1).at(i);
+        id2 -= 1;
+        //on a pu faire le mouvement, on refresh res
+        res = 1;
+      }
+      else{
+        id1 -= 1;
+        val1 = g.table.at(id1).at(i);
+        if(id1 == id2){id2-=1;} //on évite que les indices se chevauchent
+      }
+      
+    } 
+  }//rajouter une tuile de 2 ou 4 si l'action a été possible
+  if(res!=-1){
+    ajoute(g);
+    res = vides(g);
+  }
+  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
   }
 
 
