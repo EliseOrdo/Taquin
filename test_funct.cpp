@@ -69,7 +69,7 @@ void test_proportion(){
     assert(proportion(g2) == -1);
     assert(proportion(g3) == -1);
     assert(proportion(g4) == -1);
-    //assert(proportion(g5) == 2);
+    assert(proportion(g5) == 2);
 }
 
 int main(){
