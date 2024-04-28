@@ -15,7 +15,7 @@ void test_dimension(){
     assert(dimension(g3) == 1);
     assert(dimension(g4) == -1);
     assert(dimension(g5) == 5);
-    cout << "Fin du test de dimension()" << endl << endl << endl;
+    cout << "Fin du test de dimension()" << endl << endl;
 }
 
 void test_init(){
@@ -24,7 +24,7 @@ void test_init(){
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
-    cout << "Fin du test de init()" << endl << endl << endl;
+    cout << "Fin du test de init()" << endl << endl;
 }
 
 void test_vides(){
@@ -38,7 +38,7 @@ void test_vides(){
     assert(vides(g2) == -1);
     assert(vides(g3) == 10);
     assert(vides(g4) == 0);
-    cout << "Fin du test de vides()" << endl << endl << endl;
+    cout << "Fin du test de vides()" << endl << endl;
 }
 
 void test_mouvements(){

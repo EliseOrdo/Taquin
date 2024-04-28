@@ -26,8 +26,21 @@ int vides(const Grille &g){
 }
 
 int proportion(const Grille &g){
-  return -1;
+  int dim = dimension(g);
+  int prop = 0;
+  if(dim <= 0){
+    return -1;
   }
+  for(size_t i=0; i < dim; i+=1){
+    for(size_t j=0; j < dim; j+=1){
+      if(g.table.at(i).at(j) == 2){
+        prop+=1;
+      }
+    }
+  }
+  prop = (prop /(dim*dim)) * 10;
+  return prop;
+}
 
 int cible(const Grille &g){
   return g.cible;
@@ -48,12 +61,12 @@ int dimension(const Grille &g){
   }
   // Renvoie la dimension
   return dim;
-  }
+}
 
 int score(const Grille &g){
   int res = -1;
   return res;
-  }
+}
 
 bool succes(const Grille &g) { 
   for(size_t i=0; i<dimension(g); i+=1 ){
@@ -103,15 +116,67 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   return res;
 }
 
-// Ne pas oublier de vérifier la validité des paramètres !
-bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion) {
-  size_t dim = v.size(); bool res = false;
-  if (dim < 4) {
-    cerr << "Nombre de lignes insuffisant: " << v.size() << endl;
-    return res;
+bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
+  size_t dim = dimension(g);
+  // Verification de la validite des parametres
+  if(dim < 4){
+    return -1;
   }
-  // a faire
+  //Initialisation de la grille
+  g.table = v;
+  return true;
+}
+
+void ajoute(Grille &g){
+  /*ajoute une nouvelle case (hasard) dans la grille g*/
+  //parcours de la grille pour trouver le truc donné par place()
+  int id = 0; // numéro de case vide où on est
+  int pla = place(g);
+  int dim = dimension(g);
+  for(size_t i = 0; i<dim; i+=1){
+    for(size_t j = 0; j<dim; j+=1){
+      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
+    }
+  }
+}
+
+bool init(Grille &g, int dimension, int cible, int proportion) {
+  /*initialise g avec les parametres indiques ; 
+  En sortie, g doit comporter deux tuiles dont les
+  valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
+  la fonction renvoie true en cas de succes et false sinon */
+  g.cible = cible;
+  bool res = false;
+  if(dimension <= 0){return false;}
+  //parcours de la grille pour trouver le truc donné par place()
+  int id = 0; // numéro de case vide où on est
+  vector<int> t = vector<int> (dimension,0);
+  g.table = vector<vector<int>> (dimension, t);
+  int id = 0; // numéro de case vide où on est
+  int pla = place(g);
+  for(size_t i = 0; i<dimension; i+=1){
+    for(size_t j = 0; j<dimension; j+=1){
+      t.at(j) = 0; //initialisation de la case à 0
+      if(id == pla){
+        t.at(j) = nouvelle(g);
+        } //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
+    }g.table.at(i) = t;
+  }
+  res = true; 
   return res;
+}
+
+bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
+  size_t dim = dimension(g);
+  // Verification de la validite des parametres
+  if(dim <= 0){
+    return -1;
+  }
+  //Initialisation de la grille
+  g.table = v;
+  return true;
 }
 
 
