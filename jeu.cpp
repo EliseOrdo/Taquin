@@ -64,8 +64,7 @@ int dimension(const Grille &g){
 }
 
 int score(const Grille &g){
-  int res = -1;
-  return res;
+  return g.score;
 }
 
 bool succes(const Grille &g) { 
@@ -97,6 +96,7 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
   g.cible = cible;
+  g.score = 0;
   bool res = false;
   if(dimension <= 0){return false;}
   //parcours de la grille pour trouver le truc donné par place()
@@ -123,6 +123,8 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
     return -1;
   }
   //Initialisation de la grille
+  g.cible = cible;
+  g.score = 0;
   g.table = v;
   return true;
 }
@@ -153,6 +155,7 @@ int droite(Grille &g){
       else if(val1 == val2){
         g.table.at(i).at(id1) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
         g.table.at(i).at(id2) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
+        g.score += g.table.at(i).at(id1);
         //une case fusionnée ne peut se refusionner dans le même mouvement
         id1 -= 1;
         val1 = g.table.at(i).at(id1);
@@ -197,6 +200,7 @@ int gauche(Grille &g)
       }
       else if(val1 == val2){
         g.table.at(i).at(id1) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.score += g.table.at(i).at(id1);
         g.table.at(i).at(id2) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
         //une case fusionnée ne peut se refusionner dans le même mouvement
         id1 += 1;
@@ -244,6 +248,7 @@ int haut(Grille &g){
       else if(val1 == val2){
         cout<<"val1==val2 == "<<val1;
         g.table.at(id1).at(i) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.score += g.table.at(id1).at(i);
         g.table.at(id2).at(i) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
         //une case fusionnée ne peut se refusionner dans le même mouvement
         id1 += 1;
@@ -290,6 +295,7 @@ int bas(Grille &g){
       }
       else if(val1 == val2){
         g.table.at(id1).at(i) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
+        g.score += g.table.at(id1).at(i);
         g.table.at(id2).at(i) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
         //une case fusionnée ne peut se refusionner dans le même mouvement
         id1 -= 1;
