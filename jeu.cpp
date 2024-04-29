@@ -26,7 +26,7 @@ int vides(const Grille &g){
 }
 
 int proportion(const Grille &g){
-  int dim = dimension(g);
+  float dim = dimension(g);
   int prop = 0;
   if(dim <= 0){
     return -1;
@@ -34,7 +34,7 @@ int proportion(const Grille &g){
   for(size_t i=0; i < dim; i+=1){
     for(size_t j=0; j < dim; j+=1){
       if(g.table.at(i).at(j) == 2){
-        prop+=1;
+        prop += 1;
       }
     }
   }
