@@ -1,24 +1,49 @@
 #include "jeu.h"
 #include <iomanip> // pour setw dans affichage.
-
+#include "dispo.cpp"
 
 /* Les definitions actuelles des fonctions servent uniquement à ce que le
  * compilateur ne râle pas. Il faut bien sur écrire le code de ces fonctions
  */
 
 int vides(const Grille &g){
-  int res = -1;
-  return res;
+  int res = 0;
+  /*Regarde si c'est pas une grille vide*/
+  if (g.table.size() == 0){
+    return -1;
   }
+  for (size_t i=0; i < g.table.size(); i+=1){
+    if (g.table.size() != g.table.at(i).size()){
+        return -1;
+      }
+    for (size_t j=0; j < g.table.at(i).size(); j+=1){
+      if (g.table.at(i).at(j) == 0){
+        res += 1;
+      }
+    }
+  }
+  return res;
+}
 
 int proportion(const Grille &g){
-  int res = -1;
-  return res;
+  float dim = dimension(g);
+  int prop = 0;
+  if(dim <= 0){
+    return -1;
   }
+  for(size_t i=0; i < dim; i+=1){
+    for(size_t j=0; j < dim; j+=1){
+      if(g.table.at(i).at(j) == 2){
+        prop += 1;
+      }
+    }
+  }
+  prop = (prop /(dim*dim)) * 10;
+  return prop;
+}
 
 int cible(const Grille &g){
-  int res = -1;
-  return res; 
+  return g.cible;
   }
 
 int dimension(const Grille &g){
@@ -73,7 +98,21 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   g.cible = cible;
   g.score = 0;
   bool res = false;
-  // a faire
+  if(dimension <= 0){return false;}
+  //parcours de la grille pour trouver le truc donné par place()
+  vector<int> t = vector<int> (dimension,0);
+  g.table = vector<vector<int>> (dimension, t);
+  int id = 0; // numéro de case vide où on est
+  int pla = place(g);
+  for(size_t i = 0; i<dimension; i+=1){
+    for(size_t j = 0; j<dimension; j+=1){
+      t.at(j) = 0; //initialisation de la case à 0
+      if(id == pla){t.at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
+      id += 1; 
+    }g.table.at(i) = t;
+  }ajoute(g); //on ajoute la 2e tuile de départ
+  res = true; 
+
   return res;
 }
 
@@ -89,7 +128,6 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
   g.table = v;
   return true;
 }
-
 
 int droite(Grille &g){
   int res = -1; //si aucun changement possible
