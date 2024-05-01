@@ -1,5 +1,6 @@
 #include "jeu.h"
 #include <cassert>
+#include "jeu.cpp"
 
 /* A faire dans un second temps: petit menu pour exécuter les commandes de
  * l'utilisateur
@@ -100,7 +101,7 @@ void testFV() {
 }
 
 int main() {
-  // testFV();
+  //testFV();
   //  interactif();
   return 0;
 }

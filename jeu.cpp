@@ -26,20 +26,7 @@ int vides(const Grille &g){
 }
 
 int proportion(const Grille &g){
-  float dim = dimension(g);
-  int prop = 0;
-  if(dim <= 0){
-    return -1;
-  }
-  for(size_t i=0; i < dim; i+=1){
-    for(size_t j=0; j < dim; j+=1){
-      if(g.table.at(i).at(j) == 2){
-        prop += 1;
-      }
-    }
-  }
-  prop = (prop /(dim*dim)) * 10;
-  return prop;
+  return g.proportion;
 }
 
 int cible(const Grille &g){
@@ -74,7 +61,7 @@ bool succes(const Grille &g) {
     }
   }
   return false; 
-  }
+}
 
 void ajoute(Grille &g){
   /*ajoute une nouvelle case (hasard) dans la grille g*/
@@ -95,6 +82,7 @@ bool init(Grille &g, int dimension, int cible, int proportion) {
   En sortie, g doit comporter deux tuiles dont les
   valeurs et positions sont obtenues par des appels aux fonctions nouvelle et place decrites ci-apres 
   la fonction renvoie true en cas de succes et false sinon */
+  g.proportion = proportion;
   g.cible = cible;
   g.score = 0;
   bool res = false;
@@ -123,6 +111,7 @@ bool charge(Grille &g, vector<vector<int>> &v, int cible, int proportion){
     return -1;
   }
   //Initialisation de la grille
+  g.proportion = proportion;
   g.cible = cible;
   g.score = 0;
   g.table = v;
