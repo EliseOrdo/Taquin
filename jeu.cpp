@@ -66,13 +66,15 @@ bool succes(const Grille &g) {
 void ajoute(Grille &g){
   /*ajoute une nouvelle case (hasard) dans la grille g*/
   //parcours de la grille pour trouver le truc donné par place()
-  int id = 0; // numéro de case vide où on est
+  int id = -1; // numéro de case vide où on est
   int pla = place(g);
   int dim = dimension(g);
   for(size_t i = 0; i<dim; i+=1){
     for(size_t j = 0; j<dim; j+=1){
-      if(id == pla){g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place (forcément vide car initialisation), on met la valeur
-      id += 1; 
+      if(g.table.at(i).at(j) == 0){ //si la case est vide, on incrémente l'indice
+        id += 1; }
+      if(id == pla){
+        g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place, on met la valeur
     }
   }
 }
@@ -350,4 +352,38 @@ void affiche (const Grille &g) {
     }
   }
   cout << endl << "Score: " << score(g) << ", Vides: " << vides(g) << endl;
+}
+
+bool grillePleine(Grille &g){
+  /* renvoie true quand la grille est pleine et que y plus de mouvement possible*/
+  return false;
+}
+
+int main(){
+  Grille g;
+  cout<<"Bienvenue dans le 2048"<<endl<<"z : haut  q: gauche s: bas  d: droite"<<endl;
+  init(g,4, 2048, 4);
+  affiche(g);
+  bool suite = true;
+  char mouv;
+  do{
+    
+    cout<<"Quel mouvement voulez-vous effectuer ?"<<endl;
+    cin>>mouv;
+    if(mouv== 'z'){haut(g);}
+    if(mouv== 'q'){gauche(g);}
+    if(mouv== 's'){bas(g);}
+    if(mouv== 'd'){droite(g);}
+    else{cout<<"veuillez entrer z,q,s ou d."<<endl;}
+    affiche(g);
+    if(succes(g)){
+      suite = false;
+      cout<<"félicitations !!"<<endl;
+    }
+    if(grillePleine(g)){
+        suite = false;
+        cout<<"Fin"<<endl;
+    }
+  }while(suite);
+  return 0;
 }
