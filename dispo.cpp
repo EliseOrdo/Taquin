@@ -14,7 +14,7 @@ void resetRand (bool mode) { srand(mode ? time(0) : 1); }
  * Respecte la proportion (moyenne) demandee de tuiles 2
  */
 int nouvelle(const Grille &g) {
-  return (rand() % 10) < (int) proportion(g) ? 2 : 4;
+  return (rand() % 10) < (int) proportion(g) ? 4 : 2;
 }
 
 /* retourne l'indice de la prochaine case vide a remplir par la nouvelle tuile.

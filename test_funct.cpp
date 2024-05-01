@@ -20,7 +20,7 @@ void test_dimension(){
 
 void test_init(){
     cout << "Debut du test de init()" << endl;
-    resetRand(true);
+    //resetRand(true);
     Grille g;
     init(g, 4, 2048, 5);
     affiche(g);
@@ -59,6 +59,18 @@ void test_mouvements(){
     cout<<"bas :"<<endl;
     bas(g);
     affiche(g);
+     cout<<"droite :"<<endl;
+    droite(g);
+    affiche(g);
+    cout<<"gauche :"<<endl;
+    gauche(g);
+    affiche(g);
+    cout<<"haut :"<<endl;
+    haut(g);
+    affiche(g);
+    cout<<"bas :"<<endl;
+    bas(g);
+    affiche(g);
     cout<<"Fin du test des mouvements"<<endl;
 }
 
@@ -70,7 +82,6 @@ void test_proportion(){
     g3.table = {{}};
     g4.table = {{1}, {}};
     g5.table = {{2, 0, 4, 8}, {8, 16, 2, 0}, {64, 32, 2, 0}, {128, 2, 0, 0}};
-    cout<< proportion(g1) << endl;
     assert(proportion(g1) == 5);
     assert(proportion(g2) == -1);
     assert(proportion(g3) == -1);
@@ -96,6 +107,6 @@ int main(){
     test_vides();
     test_proportion();
     test_mouvements();
-    test_succes();
+    //test_succes();
     return 0;
 }

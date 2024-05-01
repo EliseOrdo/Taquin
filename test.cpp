@@ -100,7 +100,7 @@ void testFV() {
 }
 
 int main() {
-  // testFV();
+  testFV();
   //  interactif();
   return 0;
 }
