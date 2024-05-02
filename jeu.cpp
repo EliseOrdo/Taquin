@@ -353,3 +353,37 @@ void affiche (const Grille &g) {
   }
   cout << endl << "Score: " << score(g) << ", Vides: " << vides(g) << endl;
 }
+
+bool grillePleine(Grille &g){
+  /* renvoie true quand la grille est pleine et que y plus de mouvement possible*/
+  return false;
+}
+
+int main(){
+  Grille g;
+  cout<<"Bienvenue dans le 2048"<<endl<<"z : haut  q: gauche s: bas  d: droite"<<endl;
+  init(g,4, 2048, 4);
+  affiche(g);
+  bool suite = true;
+  char mouv;
+  do{
+    
+    cout<<"Quel mouvement voulez-vous effectuer ?"<<endl;
+    cin>>mouv;
+    if(mouv== 'z'){haut(g);}
+    if(mouv== 'q'){gauche(g);}
+    if(mouv== 's'){bas(g);}
+    if(mouv== 'd'){droite(g);}
+    else{cout<<"veuillez entrer z,q,s ou d."<<endl;}
+    affiche(g);
+    if(succes(g)){
+      suite = false;
+      cout<<"félicitations !!"<<endl;
+    }
+    if(grillePleine(g)){
+        suite = false;
+        cout<<"Fin"<<endl;
+    }
+  }while(suite);
+  return 0;
+}
