@@ -74,7 +74,10 @@ void ajoute(Grille &g){
       if(g.table.at(i).at(j) == 0){ //si la case est vide, on incrémente l'indice
         id += 1; }
       if(id == pla){
-        g.table.at(i).at(j) = nouvelle(g);} //(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place, on met la valeur
+        g.table.at(i).at(j) = nouvelle(g);//(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place, on met la valeur
+        i = dim;
+        j=dim;//on force la sortie
+        } 
     }
   }
 }
@@ -132,6 +135,7 @@ int droite(Grille &g){
     int id2 = id1 -1 ;
     while(id2 >= 0){ //tant qu'on est pas au début de la ligne
       val2 = g.table.at(i).at(id2);
+      cout<<"val2 : "<<val2<<" ligne : "<<id2<<" colonne : "<<i<<endl;
       if(val2 == 0){
         id2 -= 1;
       }
@@ -225,6 +229,7 @@ int haut(Grille &g){
     int id2 = id1 +1 ;
     while(id2 < g.table.size()){ //tant qu'on est pas au début de la ligne
       val2 = g.table.at(id2).at(i);
+      cout<<"val2 : "<<val2<<" ligne : "<<id2<<" colonne : "<<i<<endl;
       if(val2 == 0){
         id2 += 1;
       }
