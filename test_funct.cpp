@@ -62,25 +62,8 @@ void test_mouvements(){
     cout<<"Fin du test des mouvements"<<endl;
 }
 
-void test_proportion(){
-    cout << "Debut du test de proportion()" << endl;
-    Grille g1, g2, g3, g4, g5;
-    g1.table = {{0, 2, 0, 2}, {0, 2, 0, 2}, {0, 2, 0, 2}, {0, 2, 0, 2}};
-    g2.table = {};
-    g3.table = {{}};
-    g4.table = {{1}, {}};
-    g5.table = {{2, 0, 4, 8}, {8, 16, 2, 0}, {64, 32, 2, 0}, {128, 2, 0, 0}};
-    cout<< proportion(g1) << endl;
-    assert(proportion(g1) == 5);
-    assert(proportion(g2) == -1);
-    assert(proportion(g3) == -1);
-    assert(proportion(g4) == -1);
-    assert(proportion(g5) == 2);
-    cout << "Fin du test de proportion()" << endl;
-}
-
 void test_succes(){
-    cout<<"debut du test de succes"<<endl;
+    cout<<"Debut du test de succes"<<endl;
     Grille g;
     init(g,4,4,5);
     affiche(g);
@@ -89,15 +72,29 @@ void test_succes(){
     Grille d;
     init(d,4,5,3);
     assert(succes(d) == false);
-    cout<<"fin du test de succes"<<endl;
+    cout<<"Fin du test de succes"<<endl;
+}
+
+void test_perdu(){
+    cout << "Debut du test de perdu()" << endl;
+    Grille g, g1, g2, g3;
+    g.table = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+    g1.table = {{2, 4, 8, 16}, {32, 64, 128, 256}, {2, 4, 8, 16}, {32, 64, 128, 256}};
+    g2.table = {{2, 2, 4, 8}, {32, 64, 128, 256}, {2, 4, 8, 16}, {32, 64, 128, 256}};
+    g3.table = {{2, 4, 8, 16}, {2, 64, 128, 256}, {32, 4, 8, 16}, {32, 64, 128, 256}};
+    assert(perdu(g) == false);
+    assert(perdu(g1) == true);
+    assert(perdu(g2) == false);
+    assert(perdu(g3) == false);
+    cout<<"Fin du test de perdu()" << endl;
 }
 
 int main(){
     test_dimension();
     test_init();
     test_vides();
-    //test_proportion();
     test_mouvements();
     test_succes();
+    test_perdu();
     return 0;
 }
