@@ -77,7 +77,7 @@ void ajoute(Grille &g){
         g.table.at(i).at(j) = nouvelle(g);//(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place, on met la valeur
         i = dim;
         j=dim;//on force la sortie
-        } 
+        }
     }
   }
 }
