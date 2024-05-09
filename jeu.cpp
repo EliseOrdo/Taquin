@@ -135,7 +135,6 @@ int droite(Grille &g){
     int id2 = id1 -1 ;
     while(id2 >= 0){ //tant qu'on est pas au début de la ligne
       val2 = g.table.at(i).at(id2);
-      cout<<"val2 : "<<val2<<" ligne : "<<id2<<" colonne : "<<i<<endl;
       if(val2 == 0){
         id2 -= 1;
       }
@@ -229,7 +228,6 @@ int haut(Grille &g){
     int id2 = id1 +1 ;
     while(id2 < g.table.size()){ //tant qu'on est pas au début de la ligne
       val2 = g.table.at(id2).at(i);
-      cout<<"val2 : "<<val2<<" ligne : "<<id2<<" colonne : "<<i<<endl;
       if(val2 == 0){
         id2 += 1;
       }
@@ -242,7 +240,6 @@ int haut(Grille &g){
         res = 1;
       }
       else if(val1 == val2){
-        cout<<"val1==val2 == "<<val1;
         g.table.at(id1).at(i) = val1 + val2; // si les cases adjacentes ont les mêmes valeurs, on les fusionne (somme)
         g.score += g.table.at(id1).at(i);
         g.table.at(id2).at(i) = 0; //et on vide la case de gauche ( à faire avant chgmt id1 pour éviter chevauchement)
@@ -378,6 +375,7 @@ bool perdu(Grille &g){
     }
   }
   return true;
+}
 
 int main(){
   Grille g;
@@ -387,7 +385,6 @@ int main(){
   bool suite = true;
   char mouv;
   do{
-    
     cout<<"Quel mouvement voulez-vous effectuer ?"<<endl;
     cin>>mouv;
     if(mouv== 'z'){haut(g);}
