@@ -215,7 +215,7 @@ int gauche(Grille &g)
     ajoute(g);
     res = vides(g);
   }
-  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
+  return res; // vides(g) ou -1 si l'action est impossible 
 }
 
 int haut(Grille &g){
@@ -262,7 +262,7 @@ int haut(Grille &g){
     ajoute(g);
     res = vides(g);
   }
-  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
+  return res; // vides(g) ou -1 si l'action est impossible 
   }
 
 int bas(Grille &g){
@@ -309,7 +309,7 @@ int bas(Grille &g){
     ajoute(g);
     res = vides(g);
   }
-  return res; // vides(g) ou -1 si l'action est impossible mais je sais pas quand est-ce que c'est impossible
+  return res; // vides(g) ou -1 si l'action est impossible 
 }
 
 
