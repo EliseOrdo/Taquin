@@ -66,13 +66,14 @@ bool succes(const Grille &g) {
 void ajoute(Grille &g){
   /*ajoute une nouvelle case (hasard) dans la grille g*/
   //parcours de la grille pour trouver le truc donné par place()
-  int id = -1; // numéro de case vide où on est
+  int id = 0; // numéro de case vide où on est
   int pla = place(g);
   int dim = dimension(g);
   for(size_t i = 0; i<dim; i+=1){
     for(size_t j = 0; j<dim; j+=1){
       if(g.table.at(i).at(j) == 0){ //si la case est vide, on incrémente l'indice
         id += 1; }
+      cout<<"id : "<<id<<" pla : "<<pla<<endl;
       if(id == pla){
         g.table.at(i).at(j) = nouvelle(g);//(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place, on met la valeur
         i = dim;
@@ -399,7 +400,8 @@ int main(){
     }
     if(perdu(g)){
         suite = false;
-        cout<<"Fin"<<endl;
+        cout<<"Perdu !"<<endl;
+        _sleep(30000);
     }
   }while(suite);
   return 0;
