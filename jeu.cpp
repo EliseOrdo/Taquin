@@ -73,7 +73,6 @@ void ajoute(Grille &g){
     for(size_t j = 0; j<dim; j+=1){
       if(g.table.at(i).at(j) == 0){ //si la case est vide, on incrémente l'indice
         id += 1; }
-      cout<<"id : "<<id<<" pla : "<<pla<<endl;
       if(id == pla){
         g.table.at(i).at(j) = nouvelle(g);//(nouvelle donne la valeur de la tuile) ; si on est sur la i-ème place, on met la valeur
         i = dim;
